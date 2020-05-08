@@ -1,0 +1,2 @@
+rootProject.name='DNTest'
+include ':app'
