@@ -11,7 +11,7 @@ import dagger.Component;
         dependencies = AppComponent.class,
         modules = ActivityModule.class)
 public interface ActivityComponent {
+
     void inject(MainActivity mainActivity);
-    //void inject(PresenterImpl presenter);
-    //void inject(IMainView mainView);
+
 }

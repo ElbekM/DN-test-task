@@ -1,4 +1,4 @@
-package com.elbek.dn.test.api;
+package com.elbek.dn.test.data.api;
 
 import com.elbek.dn.test.model.NewsResponse;
 

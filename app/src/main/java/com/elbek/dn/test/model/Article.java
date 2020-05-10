@@ -1,22 +1,32 @@
 package com.elbek.dn.test.model;
 
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
+@Entity(tableName = "articles")
 public class Article {
 
+    @Embedded
     @SerializedName("source")
     @Expose
     private Source source;
     @SerializedName("author")
     @Expose
-    private Object author;
+    private String author;
     @SerializedName("title")
     @Expose
     private String title;
     @SerializedName("description")
     @Expose
     private String description;
+    @PrimaryKey
+    @NotNull
     @SerializedName("url")
     @Expose
     private String url;
@@ -38,11 +48,11 @@ public class Article {
         this.source = source;
     }
 
-    public Object getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Object author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

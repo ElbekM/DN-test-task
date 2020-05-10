@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 @Module(includes = ContextModule.class)
 public class OkHttpClientModule {
+
     @Provides
     public OkHttpClient okHttpClient(HttpLoggingInterceptor httpLoggingInterceptor){
         return new OkHttpClient()

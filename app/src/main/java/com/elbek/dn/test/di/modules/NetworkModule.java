@@ -1,6 +1,6 @@
 package com.elbek.dn.test.di.modules;
 
-import com.elbek.dn.test.api.ApiService;
+import com.elbek.dn.test.data.api.ApiService;
 
 import dagger.Module;
 import dagger.Provides;

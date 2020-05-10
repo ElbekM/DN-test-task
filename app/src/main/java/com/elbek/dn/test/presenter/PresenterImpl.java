@@ -1,6 +1,6 @@
 package com.elbek.dn.test.presenter;
 
-import com.elbek.dn.test.api.ApiService;
+import com.elbek.dn.test.data.api.ApiService;
 import com.elbek.dn.test.model.Article;
 import com.elbek.dn.test.model.NewsResponse;
 import com.elbek.dn.test.view.IMainView;
