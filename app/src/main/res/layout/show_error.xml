@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="RETRY"
+            android:text="Try Again"
+            android:textAllCaps="false"
             android:textColor="@color/colorPrimaryDark"/>
 
     </LinearLayout>

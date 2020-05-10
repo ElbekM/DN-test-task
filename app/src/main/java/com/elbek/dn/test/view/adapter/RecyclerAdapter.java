@@ -1,6 +1,7 @@
 package com.elbek.dn.test.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.elbek.dn.test.R;
 import com.elbek.dn.test.model.Article;
+import com.elbek.dn.test.view.web.WebViewActivity;
 
 import java.util.List;
 
@@ -38,13 +40,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        Article news = newsList.get(position);
+        final Article news = newsList.get(position);
         holder.newsDate.setText(news.getPublishedAt());
         holder.newsTitle.setText(news.getTitle());
         holder.newsDesc.setText(news.getDescription());
 
         // Image load
         Glide.with(context).load(news.getUrlToImage()).into(holder.newsImage);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebViewActivity.class);
+                intent.putExtra("url", news.getUrl());
+                intent.putExtra("article", news.getTitle());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

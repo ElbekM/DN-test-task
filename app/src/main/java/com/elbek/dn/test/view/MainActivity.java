@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initViews();
 
+        initViews();
+        initButtons();
         // Dugger init
         activityComponent = DaggerActivityComponent.builder()
                 .appComponent(BaseApp.get(this).getAppComponent())
@@ -64,8 +65,19 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private void initViews() {
         progressBar = findViewById(R.id.main_progress);
         errorLayout = findViewById(R.id.error_layout);
-        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
 
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+        //swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimaryDark));
+
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setInitialPrefetchItemCount(5);
+
+        recyclerView = findViewById(R.id.recycler_list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+    }
+
+    private void initButtons() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -87,13 +99,6 @@ public class MainActivity extends AppCompatActivity implements IMainView {
                     performPagination();
             }
         });
-
-        linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setInitialPrefetchItemCount(5);
-
-        recyclerView = findViewById(R.id.recycler_list);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     private void onScrollListener() {
@@ -138,6 +143,12 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     @Override
+    public void setRecyclerAdapter(List<Article> articles) {
+        adapter = new RecyclerAdapter(articles, MainActivity.this);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
     public void showLogger(int page) {
         if (page == 1)
             Toast.makeText(MainActivity.this, "FIRST PAGE IS LOADED", Toast.LENGTH_SHORT).show();
@@ -145,12 +156,6 @@ public class MainActivity extends AppCompatActivity implements IMainView {
             Toast.makeText(MainActivity.this, "NO MORE IMAGES", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(MainActivity.this, "PAGE NUM " + pageNum, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setRecyclerAdapter(List<Article> articles) {
-        adapter = new RecyclerAdapter(articles, MainActivity.this);
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -169,11 +174,6 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     public void showError(String message) {
         recyclerView.setVisibility(View.GONE);
         errorLayout.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void showFooterError(boolean show, String errorMsg) {
-
     }
 
     @Override

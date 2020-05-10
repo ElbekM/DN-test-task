@@ -18,7 +18,5 @@ public interface IMainView {
 
     void showError(String message);
 
-    void showFooterError(boolean show, String errorMsg);
-
     void clear();
 }
