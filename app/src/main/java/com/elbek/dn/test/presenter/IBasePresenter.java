@@ -2,7 +2,7 @@ package com.elbek.dn.test.presenter;
 
 public interface IBasePresenter {
 
-    void getFirstPage();
+    void loadFirstPage();
 
-    void loadMore(int page);
+    void loadData(int page);
 }

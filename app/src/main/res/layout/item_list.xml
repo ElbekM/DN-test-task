@@ -15,7 +15,7 @@
         app:cardPreventCornerOverlap="false">
 
         <ProgressBar
-            android:id="@+id/movie_progress"
+            android:id="@+id/news_progress"
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="@dimen/activity_margin"
             android:layout_height="@dimen/activity_margin"
@@ -65,7 +65,7 @@
             android:layout_marginStart="@dimen/activity_margin_content"
             android:layout_marginTop="@dimen/activity_margin_quarter"
             android:maxLines="1"
-            tools:text="Movie Title"/>
+            tools:text="News title"/>
 
         <TextView
             android:id="@+id/news_desc"
