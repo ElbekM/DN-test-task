@@ -1,7 +1,6 @@
 package com.elbek.dn.test.di.modules;
 
 import com.elbek.dn.test.api.ApiService;
-import com.elbek.dn.test.di.scope.AppScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,9 +16,8 @@ public class NetworkModule {
         return retrofit.create(ApiService.class);
     }
 
-    @AppScope
     @Provides
-    public Retrofit retrofit(OkHttpClient okHttpClient){
+    public Retrofit retrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl("http://newsapi.org/v2/")

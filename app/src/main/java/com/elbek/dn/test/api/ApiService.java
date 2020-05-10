@@ -9,6 +9,8 @@ import retrofit2.http.Query;
 public interface ApiService {
     @GET("everything")
     Call<NewsResponse> getArticles(@Query("q") String query,
-                                     @Query("from") String date, @Query("sortBy") String sortBy,
-                                     @Query("apiKey") String apiKey, @Query("page") int page);
+                                   @Query("from") String date,
+                                   @Query("sortBy") String sortBy,
+                                   @Query("apiKey") String apiKey,
+                                   @Query("page") int page);
 }

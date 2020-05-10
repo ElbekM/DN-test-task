@@ -1,13 +1,17 @@
 package com.elbek.dn.test.di.components;
 
-import com.elbek.dn.test.MainActivity;
+import com.elbek.dn.test.view.MainActivity;
 import com.elbek.dn.test.di.modules.ActivityModule;
 import com.elbek.dn.test.di.scope.ActivityScope;
 
 import dagger.Component;
 
-@Component(modules = ActivityModule.class, dependencies = AppComponent.class)
 @ActivityScope
+@Component(
+        dependencies = AppComponent.class,
+        modules = ActivityModule.class)
 public interface ActivityComponent {
-    void injectActivity(MainActivity mainActivity);
+    void inject(MainActivity mainActivity);
+    //void inject(PresenterImpl presenter);
+    //void inject(IMainView mainView);
 }
