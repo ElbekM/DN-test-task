@@ -3,10 +3,12 @@ package com.elbek.dn.test.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     PresenterImpl presenter;
 
     private ProgressBar progressBar;
+    private LinearLayout errorLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView recyclerView;
@@ -59,6 +63,30 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     private void initViews() {
         progressBar = findViewById(R.id.main_progress);
+        errorLayout = findViewById(R.id.error_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (adapter != null) {
+                    adapter.getNewsList().clear();
+                    adapter.notifyDataSetChanged();
+                    getFirstPage();
+                }
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        findViewById(R.id.btn_retry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (adapter == null)
+                    getFirstPage();
+                else
+                    performPagination();
+            }
+        });
 
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setInitialPrefetchItemCount(5);
@@ -128,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public void showLoading() {
         recyclerView.setVisibility(View.VISIBLE);
+        errorLayout.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
     }
 
@@ -138,6 +167,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     @Override
     public void showError(String message) {
+        recyclerView.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.VISIBLE);
     }
 
     @Override

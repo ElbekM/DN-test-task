@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -70,5 +71,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void addNews(List<Article> news) {
         newsList.addAll(news);
         notifyDataSetChanged();
+    }
+
+    public List<Article> getNewsList() {
+        return newsList;
     }
 }

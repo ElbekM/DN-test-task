@@ -76,4 +76,19 @@ public class PresenterImpl implements IBasePresenter {
             }
         });
     }
+
+    @Override
+    public void attachView(Object mvpView) {
+        this.view = (IMainView) mvpView;
+    }
+
+    @Override
+    public void detachView() {
+        view = null;
+    }
+
+    @Override
+    public void destroy() {
+
+    }
 }
