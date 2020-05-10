@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,7 +16,11 @@ import com.elbek.dn.test.R;
 import com.elbek.dn.test.model.Article;
 import com.elbek.dn.test.view.web.WebViewActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>  {
 
@@ -41,7 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         final Article news = newsList.get(position);
-        holder.newsDate.setText(news.getPublishedAt());
+        holder.newsDate.setText(validDate(news.getPublishedAt()));
         holder.newsTitle.setText(news.getTitle());
         holder.newsDesc.setText(news.getDescription());
 
@@ -87,5 +90,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public List<Article> getNewsList() {
         return newsList;
+    }
+
+    private String validDate(String dateTime) {
+        String resultDate = dateTime;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+        SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy - HH:mm", Locale.ENGLISH);
+        try {
+            Date d = sdf.parse(dateTime);
+            resultDate = output.format(d);
+        } catch (ParseException e) {
+            //TODO LOGS
+            e.getMessage();
+        }
+        return resultDate;
     }
 }

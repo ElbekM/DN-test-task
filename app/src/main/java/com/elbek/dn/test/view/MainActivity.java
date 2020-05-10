@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         errorLayout = findViewById(R.id.error_layout);
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
-        //swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimaryDark));
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setInitialPrefetchItemCount(5);

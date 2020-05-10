@@ -1,17 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_gravity="center"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="10dp"
+    android:id="@+id/card_view">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingEnd="140dp"
+        android:paddingBottom="@dimen/activity_margin"
+        android:backgroundTint="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/news_title"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textStyle="bold"
+            tools:text="News title"/>
+
+        <TextView
+            android:id="@+id/news_desc"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="@dimen/activity_margin_half"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textSize="14dp"
+            tools:text="Nowadays, user engagement is considered one of the most important metrics for the success of your app" />
+
+        <TextView
+            android:id="@+id/news_date"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:alpha="0.38"
+            android:maxLines="1"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold|italic"
+            tools:text="10 May 2020 - 17:34" />
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_margin_half"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
         app:cardBackgroundColor="@color/placeholder_grey"
-        app:cardCornerRadius="3dp"
+        app:cardCornerRadius="10dp"
         app:cardPreventCornerOverlap="false">
 
         <ProgressBar
@@ -20,65 +76,17 @@
             android:layout_width="@dimen/activity_margin"
             android:layout_height="@dimen/activity_margin"
             android:layout_gravity="center"
-            android:theme="@style/CircularProgress"/>
+            android:theme="@style/CircularProgress" />
 
         <ImageView
             android:id="@+id/news_image"
-            android:layout_width="@dimen/poster_thumb_width"
-            android:layout_height="@dimen/poster_thumb_height"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"/>
 
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="@dimen/activity_margin"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:paddingLeft="@dimen/poster_thumb_width"
-        android:paddingRight="@dimen/activity_margin"
-        android:paddingStart="@dimen/poster_thumb_width"
-        android:paddingTop="@dimen/activity_margin_half">
 
-        <TextView
-            android:id="@+id/news_date"
-            style="@style/TextAppearance.AppCompat.Caption"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_content"
-            android:layout_marginStart="@dimen/activity_margin_content"
-            android:alpha="0.38"
-            android:gravity="end"
-            android:maxLines="1"
-            android:textStyle="bold"
-            tools:text="2009 | EN"/>
 
-        <TextView
-            android:id="@+id/news_title"
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_content"
-            android:layout_marginStart="@dimen/activity_margin_content"
-            android:layout_marginTop="@dimen/activity_margin_quarter"
-            android:maxLines="1"
-            tools:text="News title"/>
 
-        <TextView
-            android:id="@+id/news_desc"
-            style="@style/TextAppearance.AppCompat.Caption"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_content"
-            android:layout_marginStart="@dimen/activity_margin_content"
-            android:layout_marginTop="@dimen/activity_margin_half"
-            android:ellipsize="end"
-            android:maxLines="2"
-            tools:text="Nowadays, user engagement is considered one of the most important metrics for the success of your app"/>
-
-    </LinearLayout>
-
-</FrameLayout>
+</androidx.cardview.widget.CardView>

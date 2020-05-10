@@ -16,11 +16,12 @@
         <TextView
             android:id="@+id/title_error"
             style="@style/TextAppearance.AppCompat.Subhead"
+            android:textSize="17sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="No internet connection."/>
+            android:text="No Internet Connection"
+            android:textColor="@color/colorAccent"/>
 
         <Button
             android:id="@+id/btn_retry"
@@ -29,9 +30,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
             android:text="Try Again"
+            android:textSize="18sp"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="#2f5491"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
