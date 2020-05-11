@@ -19,7 +19,7 @@ public class OkHttpClientModule {
     @Provides
     public HttpLoggingInterceptor httpLoggingInterceptor(){
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
         return httpLoggingInterceptor;
     }
 }

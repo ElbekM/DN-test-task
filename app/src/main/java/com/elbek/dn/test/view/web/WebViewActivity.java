@@ -21,13 +21,13 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view);
+        setContentView(R.layout.activity_web);
 
         url = getIntent().getStringExtra("url");
         article = getIntent().getStringExtra("article");
         setTitle(article);
 
-        progressBar = findViewById(R.id.progress_bar);
+        progressBar = findViewById(R.id.progress_bar_web);
         webView = findViewById (R.id.web_view);
 
         webView.loadUrl(url);

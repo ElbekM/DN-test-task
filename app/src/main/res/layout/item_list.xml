@@ -13,13 +13,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@android:color/white"
+        android:backgroundTint="@color/colorPrimary"
         android:orientation="vertical"
         android:paddingEnd="140dp"
-        android:paddingBottom="@dimen/activity_margin"
-        android:backgroundTint="@color/colorPrimary">
+        android:paddingBottom="@dimen/activity_margin">
 
         <TextView
             android:id="@+id/news_title"
@@ -31,18 +31,18 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textStyle="bold"
-            tools:text="News title"/>
+            tools:text="News title" />
 
         <TextView
             android:id="@+id/news_desc"
             style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="@dimen/activity_margin_half"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textSize="14dp"
+            android:textSize="14sp"
             tools:text="Nowadays, user engagement is considered one of the most important metrics for the success of your app" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
-            android:alpha="0.38"
+            android:alpha="0.8"
             android:maxLines="1"
             android:textColor="@color/colorAccent"
             android:textStyle="bold|italic"
@@ -85,8 +85,5 @@
             android:scaleType="centerCrop"/>
 
     </androidx.cardview.widget.CardView>
-
-
-
 
 </androidx.cardview.widget.CardView>

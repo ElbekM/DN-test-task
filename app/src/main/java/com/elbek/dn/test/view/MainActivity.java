@@ -7,7 +7,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -19,7 +18,9 @@ import com.elbek.dn.test.di.components.DaggerActivityComponent;
 import com.elbek.dn.test.di.modules.ActivityModule;
 import com.elbek.dn.test.model.Article;
 import com.elbek.dn.test.presenter.PresenterImpl;
-import com.elbek.dn.test.view.adapter.RecyclerAdapter;
+import com.elbek.dn.test.view.adapter.ArticleAdapter;
+import com.elbek.dn.test.view.interfaces.IPageLoading;
+import com.elbek.dn.test.view.interfaces.IMainView;
 
 import java.util.List;
 
@@ -36,12 +37,12 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView recyclerView;
-    private RecyclerAdapter adapter;
+    private ArticleAdapter adapter;
 
     private ActivityComponent activityComponent;
 
-    private int pageNum = 1;
-    Boolean isScrolling = false;
+    private boolean isLoading = false;
+    private int currentPage = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
         initViews();
         initButtons();
+
         // Dugger init
         activityComponent = DaggerActivityComponent.builder()
                 .appComponent(BaseApp.get(this).getAppComponent())
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         activityComponent.inject(this);
 
         onScrollListener();
-        getFirstPage();
+        presenter.loadFirstPage();
     }
 
     private void initViews() {
@@ -75,87 +77,62 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         recyclerView = findViewById(R.id.recycler_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        adapter = new ArticleAdapter(new IPageLoading() {
+            @Override
+            public void retryLoadingPage() {
+                presenter.loadData(currentPage);
+            }
+        }, MainActivity.this);
+
+        recyclerView.setAdapter(adapter);
     }
 
     private void initButtons() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (adapter != null) {
-                    adapter.getNewsList().clear();
-                    adapter.notifyDataSetChanged();
-                    getFirstPage();
-                }
                 swipeRefreshLayout.setRefreshing(false);
+                presenter.loadFirstPage();
             }
         });
 
-        findViewById(R.id.btn_retry).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_loading_error).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (adapter == null)
-                    getFirstPage();
-                else
-                    performPagination();
+                presenter.loadFirstPage();
             }
         });
     }
 
     private void onScrollListener() {
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    isScrolling = true;
-                }
-            }
-
+        // Pagination logic
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {  //isScrolling
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int currentItems = linearLayoutManager.getChildCount();
-                int totalItems = linearLayoutManager.getItemCount();
-                int scrollOutItems = linearLayoutManager.findFirstVisibleItemPosition();
 
-                if(isScrolling && (currentItems + scrollOutItems == totalItems)) {
-                    isScrolling = false;
-                    pageNum += 1;
-                    performPagination();
+                int visibleItemCount = linearLayoutManager.getChildCount();
+                int totalItemCount = linearLayoutManager.getItemCount();
+                int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (!isLoading) {
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                        isLoading = true;
+                        currentPage += 1;
+                        presenter.loadData(currentPage);
+                    }
                 }
             }
         });
     }
 
-    private void getFirstPage() {
-        showLoading();
-        presenter.loadFirstPage();
-    }
-
-    private void performPagination() {
-        showLoading();
-        presenter.loadData(pageNum);
-    }
-
     @Override
     public void setData(List<Article> articles) {
-        adapter.addNews(articles);
-    }
-
-    @Override
-    public void setRecyclerAdapter(List<Article> articles) {
-        adapter = new RecyclerAdapter(articles, MainActivity.this);
-        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void showLogger(int page) {
-        if (page == 1)
-            Toast.makeText(MainActivity.this, "FIRST PAGE IS LOADED", Toast.LENGTH_SHORT).show();
-        else if (page == 5)
-            Toast.makeText(MainActivity.this, "NO MORE IMAGES", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(MainActivity.this, "PAGE NUM " + pageNum, Toast.LENGTH_SHORT).show();
+        adapter.removeLoadingElement();
+        isLoading = false;
+        adapter.addAll(articles);
+        adapter.addLoadingElement();
     }
 
     @Override
@@ -177,6 +154,26 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     @Override
+    public void displayErrorElement(boolean show, String message) {
+        adapter.displayRetryElement(show);
+    }
+
+    @Override
+    public void displayToast() {
+        adapter.removeLoadingElement();
+        Toast.makeText(MainActivity.this, "Last page :(", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void clear() {
+        adapter.clear();
+        adapter.displayRetryElement(false);
+        currentPage = 1;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
     }
 }

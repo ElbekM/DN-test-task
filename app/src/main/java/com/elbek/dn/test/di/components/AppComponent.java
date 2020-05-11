@@ -1,6 +1,7 @@
 package com.elbek.dn.test.di.components;
 
 import com.elbek.dn.test.data.api.ApiService;
+import com.elbek.dn.test.data.database.ArticleDao;
 import com.elbek.dn.test.di.BaseApp;
 import com.elbek.dn.test.di.modules.DatabaseModule;
 import com.elbek.dn.test.di.modules.NetworkModule;
@@ -16,5 +17,6 @@ public interface AppComponent {
 
     void inject(BaseApp app);
     ApiService getApiService();
+    ArticleDao getArticleDao();
 
 }

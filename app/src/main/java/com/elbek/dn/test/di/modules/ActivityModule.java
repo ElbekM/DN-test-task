@@ -1,8 +1,9 @@
 package com.elbek.dn.test.di.modules;
 
 import com.elbek.dn.test.data.api.ApiService;
+import com.elbek.dn.test.data.database.ArticleDao;
 import com.elbek.dn.test.presenter.PresenterImpl;
-import com.elbek.dn.test.view.IMainView;
+import com.elbek.dn.test.view.interfaces.IMainView;
 
 import javax.inject.Inject;
 
@@ -14,6 +15,9 @@ public class ActivityModule {
 
     @Inject
     ApiService apiService;
+
+    @Inject
+    ArticleDao db;
 
     private IMainView view;
 
@@ -27,7 +31,7 @@ public class ActivityModule {
     }
 
     @Provides
-    public PresenterImpl provideMainActivityPresenterImpl (IMainView view, ApiService apiService) {    //???
-        return new PresenterImpl(view, apiService);
+    public PresenterImpl provideMainActivityPresenterImpl (IMainView view, ApiService apiService, ArticleDao db) {
+        return new PresenterImpl(view, apiService, db);
     }
 }

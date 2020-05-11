@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cat News</string>
+    <string name="connection">No Internet Connection</string>
+    <string name="reconnect">Try Again</string>
 </resources>

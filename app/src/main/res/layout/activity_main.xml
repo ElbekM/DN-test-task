@@ -30,7 +30,7 @@
         android:theme="@style/CircularProgress" />
 
     <include
-        layout="@layout/show_error"
+        layout="@layout/item_error"
         android:visibility="gone"/>
 
 </FrameLayout>

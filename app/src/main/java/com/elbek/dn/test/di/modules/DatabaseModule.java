@@ -30,7 +30,3 @@ public class DatabaseModule {
     }
 
 }
-
-
-//AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-//        AppDatabase.class, "populus-database").build();
