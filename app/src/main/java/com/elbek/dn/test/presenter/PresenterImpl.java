@@ -4,6 +4,7 @@ import com.elbek.dn.test.data.api.ApiService;
 import com.elbek.dn.test.data.database.ArticleDao;
 import com.elbek.dn.test.model.Article;
 import com.elbek.dn.test.model.NewsResponse;
+import com.elbek.dn.test.view.MainActivity;
 import com.elbek.dn.test.view.interfaces.IMainView;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public class PresenterImpl implements IBasePresenter {
     private ArticleDao db;
 
     @Inject
-    public PresenterImpl(IMainView view, ApiService apiService, ArticleDao db) {
-        this.view = view;
+    public PresenterImpl(ApiService apiService, ArticleDao db) {
+        //this.view = view;
         this.apiService = apiService;
         this.db = db;
     }
@@ -76,6 +77,11 @@ public class PresenterImpl implements IBasePresenter {
                 view.displayErrorElement(true, t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void attachView(MainActivity view) {
+        this.view = view;
     }
 
     @Override

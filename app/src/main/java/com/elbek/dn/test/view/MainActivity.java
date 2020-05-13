@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         initViews();
         initButtons();
 
-        // Dugger init
+        // Dagger init
         activityComponent = DaggerActivityComponent.builder()
                 .appComponent(BaseApp.get(this).getAppComponent())
                 .activityModule(new ActivityModule(this))
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         activityComponent.inject(this);
 
         onScrollListener();
+        presenter.attachView(this);
         presenter.loadFirstPage();
     }
 

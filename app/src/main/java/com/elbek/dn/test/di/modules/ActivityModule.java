@@ -31,7 +31,7 @@ public class ActivityModule {
     }
 
     @Provides
-    public PresenterImpl provideMainActivityPresenterImpl (IMainView view, ApiService apiService, ArticleDao db) {
-        return new PresenterImpl(view, apiService, db);
+    public PresenterImpl provideMainActivityPresenterImpl (ApiService apiService, ArticleDao db) {
+        return new PresenterImpl(apiService, db);
     }
 }
