@@ -8,7 +8,7 @@ News reader app for Android platforms. Test task for Digital Nomads.
 - The program was written in Java
 - App architecture: MVP
 - Dependency injection: Dagger 2
-- Work with API: Retrofit (+okHttp)
+- Work with API: Retrofit(+okHttp), RxJava 2
 - Database implemented with Room
 - Work with images: Glide
 
