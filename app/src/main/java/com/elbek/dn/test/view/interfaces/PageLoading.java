@@ -1,6 +1,6 @@
 package com.elbek.dn.test.view.interfaces;
 
-public interface IPageLoading {
+public interface PageLoading {
 
     void retryLoadingPage();
 

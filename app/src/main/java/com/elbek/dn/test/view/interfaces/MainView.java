@@ -4,7 +4,7 @@ import com.elbek.dn.test.model.Article;
 
 import java.util.List;
 
-public interface IMainView {
+public interface MainView {
 
     void setData(List<Article> articles);
 

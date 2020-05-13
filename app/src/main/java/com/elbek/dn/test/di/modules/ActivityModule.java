@@ -3,7 +3,7 @@ package com.elbek.dn.test.di.modules;
 import com.elbek.dn.test.data.api.ApiService;
 import com.elbek.dn.test.data.database.ArticleDao;
 import com.elbek.dn.test.presenter.PresenterImpl;
-import com.elbek.dn.test.view.interfaces.IMainView;
+import com.elbek.dn.test.view.interfaces.MainView;
 
 import javax.inject.Inject;
 
@@ -19,14 +19,14 @@ public class ActivityModule {
     @Inject
     ArticleDao db;
 
-    private IMainView view;
+    private MainView view;
 
-    public ActivityModule(IMainView view) {
+    public ActivityModule(MainView view) {
         this.view = view;
     }
 
     @Provides
-    public IMainView provideView() {
+    public MainView provideView() {
         return view;
     }
 

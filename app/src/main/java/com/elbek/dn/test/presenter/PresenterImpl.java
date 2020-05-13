@@ -4,7 +4,7 @@ import com.elbek.dn.test.data.api.ApiService;
 import com.elbek.dn.test.data.database.ArticleDao;
 import com.elbek.dn.test.model.NewsResponse;
 import com.elbek.dn.test.view.MainActivity;
-import com.elbek.dn.test.view.interfaces.IMainView;
+import com.elbek.dn.test.view.interfaces.MainView;
 
 import java.util.Objects;
 
@@ -17,11 +17,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class PresenterImpl implements IBasePresenter {
+public class PresenterImpl implements BasePresenter {
 
     private final static String LAST_PAGE = "HTTP 426 Upgrade Required";
 
-    private IMainView view;
+    private MainView view;
     private ApiService apiService;
     private ArticleDao db;
 

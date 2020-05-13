@@ -2,7 +2,7 @@ package com.elbek.dn.test.presenter;
 
 import com.elbek.dn.test.view.MainActivity;
 
-public interface IBasePresenter {
+public interface BasePresenter {
 
     void loadFirstPage();
 

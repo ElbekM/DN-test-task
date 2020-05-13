@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.elbek.dn.test.R;
 import com.elbek.dn.test.model.Article;
-import com.elbek.dn.test.view.interfaces.IPageLoading;
+import com.elbek.dn.test.view.interfaces.PageLoading;
 import com.elbek.dn.test.view.web.WebViewActivity;
 
 import java.text.ParseException;
@@ -33,12 +33,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private Context context;
     private List<Article> articleList;
-    private IPageLoading paginationWork;
+    private PageLoading paginationWork;
 
     private boolean isLoadingAdded = false;
     private boolean retryPage = false;
 
-    public ArticleAdapter(IPageLoading paginationWork, Context context) {
+    public ArticleAdapter(PageLoading paginationWork, Context context) {
         articleList = new ArrayList<>();
         this.paginationWork = paginationWork;
         this.context = context;

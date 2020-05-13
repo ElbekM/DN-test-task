@@ -1,5 +1,5 @@
 # CatNews
-News reader app for Android platforms. Test task for Digital Nomads.
+News reader app for Android platforms.
 
 # Screenshots:
 <img src="/screenshots/screen3.png" height="400px"/> <img src="/screenshots/screen1.png" height="400px"/> <img src="/screenshots/screen2.png" height="400px"/>

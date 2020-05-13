@@ -19,14 +19,14 @@ import com.elbek.dn.test.di.modules.ActivityModule;
 import com.elbek.dn.test.model.Article;
 import com.elbek.dn.test.presenter.PresenterImpl;
 import com.elbek.dn.test.view.adapter.ArticleAdapter;
-import com.elbek.dn.test.view.interfaces.IPageLoading;
-import com.elbek.dn.test.view.interfaces.IMainView;
+import com.elbek.dn.test.view.interfaces.PageLoading;
+import com.elbek.dn.test.view.interfaces.MainView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements IMainView {
+public class MainActivity extends AppCompatActivity implements MainView {
 
     @Inject
     PresenterImpl presenter;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new ArticleAdapter(new IPageLoading() {
+        adapter = new ArticleAdapter(new PageLoading() {
             @Override
             public void retryLoadingPage() {
                 presenter.loadData(currentPage);
